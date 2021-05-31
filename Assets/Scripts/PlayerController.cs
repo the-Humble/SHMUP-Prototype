@@ -48,4 +48,13 @@ public class PlayerController : MonoBehaviour
 
         transform.position = viewPos;
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
+        if(collision.otherCollider.gameObject)
+        {
+            Destroy(gameObject);
+        }
+    }
 }

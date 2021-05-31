@@ -6,7 +6,9 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] float projectileSpeed = 5f;
     [SerializeField] float lifetime = 3f;
+    [SerializeField] bool destroyOnCollision = true;
     private Rigidbody2D rigidbody;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -20,5 +22,12 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (destroyOnCollision)
+        {
+            Destroy(gameObject);
+        }
     }
 }
