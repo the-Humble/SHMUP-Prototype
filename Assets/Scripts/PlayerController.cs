@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
             weapon.ActiveState(false);
         }
         currentWeapon.ActiveState(true);
+        transform.rotation= Quaternion.Euler(0,0,90);
     }
 
     private void Update()
@@ -51,8 +52,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
-        if(collision.otherCollider.gameObject)
+        if(collision.gameObject.GetComponent<Asteroid>() != null)
         {
             Destroy(gameObject);
         }
