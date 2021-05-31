@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
+    [SerializeField] private int scoreValue = 10;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Limit")
@@ -14,9 +16,11 @@ public class Asteroid : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(/*TODO: Place projectile differentiator here*/ true)
+        if(collision.gameObject.GetComponent<Projectile>() != null)
         {
             // TODO: Check game state for enemy destroyed by projectile
+            // Add to score
+            Score.AddScore(scoreValue);
             Destroy(this.gameObject);
         }
     }
