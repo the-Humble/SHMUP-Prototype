@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
             Invoke("RespawnPlayer", 2);
         }
 
-        if(playerLives < 0)
+        if(playerLives == 0 && livePlayer == null)
         {
             Debug.Log("Game Over");
             //Game Over
