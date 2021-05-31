@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] int playerLives = 3;
+    [SerializeField] public int playerLives = 3;
     private int lifeCount;
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject livePlayer;
