@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Vector2 spawnLocation;
 
     private bool respawning = false;
+    private bool gameOver = false;
+
+    public bool GameOver { get { return gameOver; } }
 
     public int enemiesNeededToWin = 20;
     public int enemieskilled = 0;
@@ -31,10 +34,9 @@ public class GameManager : MonoBehaviour
             Invoke("RespawnPlayer", 2);
         }
 
-        if(playerLives == 0 && livePlayer == null)
+        if(playerLives < 0 && livePlayer == null)
         {
-            Debug.Log("Game Over");
-            //Game Over
+            gameOver = true;
         }
     }
 
