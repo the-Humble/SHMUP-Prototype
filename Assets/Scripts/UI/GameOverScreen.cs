@@ -17,7 +17,7 @@ public class GameOverScreen : MonoBehaviour
     void Update()
     {
         /*TODO: Check game manager for game over state maybe?*/
-        if (manager.playerLives <= 0)
+        if (manager.GameOver)
         {
             gameOverScreen.SetActive(true);
         }

@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee1de25d9906ce04e8c12ba9cba24279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 50
+  projectileSpeed: 30
   lifetime: 3
   destroyOnCollision: 1
 --- !u!61 &8993752701021081121
