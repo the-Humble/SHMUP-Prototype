@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
             Invoke("RespawnPlayer", 2);
         }
 
-        if(playerLives < 0 && livePlayer == null)
+        if(playerLives <= 0 && livePlayer == null)
         {
             gameOver = true;
         }

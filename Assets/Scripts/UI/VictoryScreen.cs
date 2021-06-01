@@ -2,23 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameOverScreen : MonoBehaviour
+public class VictoryScreen : MonoBehaviour
 {
-    [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private GameObject victoryScreen;
     [SerializeField] private GameManager manager;
 
     // Start is called before the first frame update
     void Start()
     {
-        gameOverScreen.SetActive(false);
+        victoryScreen.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (manager.GameOver)
+        if (manager.enemieskilled == manager.enemiesNeededToWin)
         {
-            gameOverScreen.SetActive(true);
+            victoryScreen.SetActive(true);
         }
     }
 }
