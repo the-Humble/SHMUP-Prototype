@@ -21,7 +21,10 @@ public class Asteroid : MonoBehaviour
             // TODO: Check game state for enemy destroyed by projectile
             // Add to score
             Score.AddScore(scoreValue);
-            Destroy(gameObject);
+
+            FindObjectOfType<GameManager>().enemieskilled++;
+
+            Destroy(this.gameObject);
         }
     }
 }
