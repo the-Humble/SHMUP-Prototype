@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
 
     private bool respawning = false;
 
+    public int enemiesNeededToWin = 20;
+    public int enemieskilled = 0;
+
 
     // Start is called before the first frame update
     void Start()

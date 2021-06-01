@@ -16,6 +16,5 @@ public class GameStateTracker : MonoBehaviour
         set{}
     }
 
-    public int enemiesNeededToWin = 20;
-    public int enemieskilled = 0;
+
 }
