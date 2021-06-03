@@ -20,6 +20,14 @@ public class GameManager : MonoBehaviour
     public int enemiesNeededToWin = 20;
     public int enemieskilled = 0;
 
+    private bool invincibilityPUPflag = false;
+    private bool speedPUPflag = false;
+    private bool quickShotPUPflag = false;
+
+    private Coroutine invincibiltyCoroutine;
+    private Coroutine speedCoroutine;
+    private Coroutine quickshotCoroutine;
+
 
     // Start is called before the first frame update
     void Start()
@@ -67,22 +75,25 @@ public class GameManager : MonoBehaviour
             case 0:
                 if (player != null)
                 {
-                    player.playerSpeed *=2;
-                    StartCoroutine(SpeedCoroutine(duration));
+                    if (speedPUPflag) StopCoroutine(speedCoroutine);
+                    else player.playerSpeed *=2;                    
+                    speedCoroutine = StartCoroutine(SpeedCoroutine(duration));
                 }
                 break;
             case 1:
                 if (player != null)
                 {
-                    player.currentWeapon.fireCooldown -= 0.2f;
-                    StartCoroutine(QuickShotCoroutine(duration));
+                    if (quickShotPUPflag) StopCoroutine(quickshotCoroutine);
+                    else player.currentWeapon.fireCooldown -= 0.2f;
+                    quickshotCoroutine =  StartCoroutine(QuickShotCoroutine(duration));
                 }
                 break;
             case 2:
                 if(player != null)
                 {
-                    player.invincibilityFlag = true;
-                    StartCoroutine(InvincibilityCoroutine(duration));
+                    if (invincibilityPUPflag) StopCoroutine(invincibiltyCoroutine);
+                    else player.invincibilityFlag = true;
+                    invincibiltyCoroutine = StartCoroutine(InvincibilityCoroutine(duration));
                 }
                 break;
             default:
@@ -92,7 +103,10 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator InvincibilityCoroutine(float duration)
     {
-        while(duration > 0)
+        invincibilityPUPflag = true;
+
+
+        while(duration > 0 && !respawning)
         {
             duration -= Time.deltaTime;
             
@@ -103,11 +117,15 @@ public class GameManager : MonoBehaviour
         {
             player.invincibilityFlag = false;
         }
+
+        invincibilityPUPflag = false;
     }
 
     public IEnumerator SpeedCoroutine(float duration)
     {
-        while (duration > 0)
+        speedPUPflag = true;
+
+        while (duration > 0 && !respawning)
         {
             duration -= Time.deltaTime;
 
@@ -118,11 +136,15 @@ public class GameManager : MonoBehaviour
         {
             player.playerSpeed /= 2;
         }
+
+        speedPUPflag = false;
     }
 
     public IEnumerator QuickShotCoroutine(float duration)
     {
-        while (duration > 0)
+        quickShotPUPflag = true;
+
+        while (duration > 0 && !respawning)
         {
             duration -= Time.deltaTime;
 
@@ -133,5 +155,7 @@ public class GameManager : MonoBehaviour
         {
             player.currentWeapon.fireCooldown += 0.2f;
         }
+
+        quickShotPUPflag = false;
     }
 }
