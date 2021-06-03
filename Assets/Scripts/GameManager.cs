@@ -9,13 +9,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject livePlayer;
     [SerializeField] private Vector2 spawnLocation;
+    [SerializeField] public int timeCount = 300;
 
     private bool respawning = false;
     private bool gameOver = false;
+    private bool victory = false;
 
     private PlayerController player;
 
     public bool GameOver { get { return gameOver; } }
+
+    public bool Victory { get { return victory; } }
 
     public int enemiesNeededToWin = 20;
     public int enemieskilled = 0;
@@ -26,8 +30,11 @@ public class GameManager : MonoBehaviour
     {
         lifeCount = playerLives;
 
-        // Get player
+        // Get player controller's component
         player = FindObjectOfType<PlayerController>();
+
+        // Start Timer
+        StartCoroutine(timeCoroutine());
     }
 
     // Update is called once per frame
@@ -39,9 +46,17 @@ public class GameManager : MonoBehaviour
             Invoke("RespawnPlayer", 2);
         }
 
-        if(playerLives <= 0 && livePlayer == null)
+        if(playerLives <= 0 && livePlayer == null && !gameOver)
         {
+            Time.timeScale = 0;
             gameOver = true;
+            Score.ResetScore();
+        }
+
+        if (enemieskilled >= enemiesNeededToWin && !victory)
+        {
+            Time.timeScale = 0;
+            victory = true;
             Score.ResetScore();
         }
     }
@@ -132,6 +147,15 @@ public class GameManager : MonoBehaviour
         if (player != null)
         {
             player.currentWeapon.fireCooldown += 0.2f;
+        }
+    }
+
+    private IEnumerator timeCoroutine()
+    {
+        while(timeCount > 0)
+        {
+            timeCount--;
+            yield return new WaitForSeconds(1);
         }
     }
 }
