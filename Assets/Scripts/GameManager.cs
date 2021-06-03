@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour
 
         if (enemieskilled >= enemiesNeededToWin && !victory)
         {
+            Score.AddScore(timeCount);
             Time.timeScale = 0;
             victory = true;
             Score.ResetScore();

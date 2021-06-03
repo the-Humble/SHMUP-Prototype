@@ -8,11 +8,13 @@ public class SceneButton : MonoBehaviour
     public void ReloadScene()
     {
         Scene scene = SceneManager.GetActiveScene();
+        Time.timeScale = 1;
         SceneManager.LoadScene(scene.name);
     }
 
     public void ChangeScene(string sceneName)
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(sceneName);
     }
 
