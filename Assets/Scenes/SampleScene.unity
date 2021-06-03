@@ -358,6 +358,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 3514538230986478715, guid: 397bae55ba7656e4987a38a6563ecee3, type: 3}
   livePlayer: {fileID: 666977388}
   spawnLocation: {x: -7.5, y: 0}
+  timeCount: 300
   enemiesNeededToWin: 20
   enemieskilled: 0
 --- !u!4 &1083877921
@@ -480,6 +481,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3000978852404770179, guid: 9904d09763e68c2449c5687649bafde6, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 1083877920}
     - target: {fileID: 3659648665374376677, guid: 9904d09763e68c2449c5687649bafde6, type: 3}
       propertyPath: m_Name
       value: Player Lifes Text

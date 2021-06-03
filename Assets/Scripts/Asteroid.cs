@@ -5,7 +5,8 @@ using UnityEngine;
 public class Asteroid : MonoBehaviour
 {
     [SerializeField] private int scoreValue = 10;
-    [SerializeField] private ParticleSystem deathPaticles;
+    [SerializeField] private PowerUp[] drops;
+    [Range(0,1)][SerializeField] private float PUPDropChance = .5f;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -25,10 +26,10 @@ public class Asteroid : MonoBehaviour
 
             FindObjectOfType<GameManager>().enemieskilled++;
 
-            if (deathPaticles)
-            {
-                var temp =Instantiate(deathPaticles, transform.position, Quaternion.identity);
-                Destroy(temp, 2);
+            if ((float)Random.Range(0, 10) /10 <= PUPDropChance){
+                var PUP = drops[Random.Range(0, drops.Length)];
+                if (PUP)
+                    Instantiate(PUP, transform.position, Quaternion.identity);
             }
 
             Destroy(this.gameObject);
