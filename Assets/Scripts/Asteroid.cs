@@ -5,6 +5,7 @@ using UnityEngine;
 public class Asteroid : MonoBehaviour
 {
     [SerializeField] private int scoreValue = 10;
+    [SerializeField] private ParticleSystem deathPaticles;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -23,6 +24,12 @@ public class Asteroid : MonoBehaviour
             Score.AddScore(scoreValue);
 
             FindObjectOfType<GameManager>().enemieskilled++;
+
+            if (deathPaticles)
+            {
+                var temp =Instantiate(deathPaticles, transform.position, Quaternion.identity);
+                Destroy(temp, 2);
+            }
 
             Destroy(this.gameObject);
         }
