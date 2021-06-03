@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     private bool respawning = false;
     private bool gameOver = false;
 
+    private PlayerController player;
+
     public bool GameOver { get { return gameOver; } }
 
     public int enemiesNeededToWin = 20;
@@ -23,6 +25,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         lifeCount = playerLives;
+
+        // Get player
+        player = FindObjectOfType<PlayerController>();
     }
 
     // Update is called once per frame
@@ -37,6 +42,7 @@ public class GameManager : MonoBehaviour
         if(playerLives <= 0 && livePlayer == null)
         {
             gameOver = true;
+            Score.ResetScore();
         }
     }
 
@@ -44,6 +50,7 @@ public class GameManager : MonoBehaviour
     {
         playerLives--;
         livePlayer = Instantiate(playerPrefab, spawnLocation, Quaternion.identity);
+        player = livePlayer.GetComponent<PlayerController>();
         respawning = false;
     }
 
@@ -51,5 +58,80 @@ public class GameManager : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(spawnLocation, 1);
+    }
+
+    public void ApplyPowerUp(float duration, int option)
+    {
+        switch(option)
+        {
+            case 0:
+                if (player != null)
+                {
+                    player.playerSpeed *=2;
+                    StartCoroutine(SpeedCoroutine(duration));
+                }
+                break;
+            case 1:
+                if (player != null)
+                {
+                    player.currentWeapon.fireCooldown -= 0.2f;
+                    StartCoroutine(QuickShotCoroutine(duration));
+                }
+                break;
+            case 2:
+                if(player != null)
+                {
+                    player.invincibilityFlag = true;
+                    StartCoroutine(InvincibilityCoroutine(duration));
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    public IEnumerator InvincibilityCoroutine(float duration)
+    {
+        while(duration > 0)
+        {
+            duration -= Time.deltaTime;
+            
+            yield return null;
+        }
+
+        if(player != null)
+        {
+            player.invincibilityFlag = false;
+        }
+    }
+
+    public IEnumerator SpeedCoroutine(float duration)
+    {
+        while (duration > 0)
+        {
+            duration -= Time.deltaTime;
+
+            yield return null;
+        }
+
+        if (player != null)
+        {
+            player.playerSpeed /= 2;
+        }
+    }
+
+    public IEnumerator QuickShotCoroutine(float duration)
+    {
+        while (duration > 0)
+        {
+            duration -= Time.deltaTime;
+
+            yield return null;
+        }
+
+        if (player != null)
+        {
+            player.currentWeapon.fireCooldown += 0.2f;
+        }
     }
 }
