@@ -17,6 +17,8 @@ public class PowerUp : MonoBehaviour
     [SerializeField] float lifeTime;
     [SerializeField] float blinkLifeTime;
     [SerializeField] float blinkTime;
+    [SerializeField] float animationStength = .005f;
+    [SerializeField] float animationSpeed = 2f;
 
     private GameManager gManager;
 
@@ -24,6 +26,11 @@ public class PowerUp : MonoBehaviour
     {
         gManager = FindObjectOfType<GameManager>();
         StartCoroutine(LifeTime());
+    }
+
+    private void FixedUpdate() 
+    {
+        gameObject.transform.position += new Vector3(0, Mathf.Cos(Time.time*animationSpeed)*animationStength, 0);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
