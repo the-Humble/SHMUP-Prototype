@@ -22,7 +22,7 @@ public class Timer : MonoBehaviour
 
     private void UpdateTimer()
     {
-        text.text = gManager.timeCount.ToString();
+        text.text = gManager.Timer.ToString();
     }
 }
 

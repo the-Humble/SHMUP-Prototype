@@ -7,6 +7,7 @@ public class Asteroid : MonoBehaviour
     [SerializeField] private int scoreValue = 10;
     [SerializeField] private PowerUp[] drops;
     [Range(0,1)][SerializeField] private float PUPDropChance = .5f;
+    [SerializeField] private ParticleSystem deathPaticles;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -24,12 +25,19 @@ public class Asteroid : MonoBehaviour
             // Add to score
             Score.AddScore(scoreValue);
 
-            FindObjectOfType<GameManager>().enemieskilled++;
 
             if ((float)Random.Range(0, 10) /10 <= PUPDropChance){
                 var PUP = drops[Random.Range(0, drops.Length)];
                 if (PUP)
                     Instantiate(PUP, transform.position, Quaternion.identity);
+            }
+
+            FindObjectOfType<GameManager>().enemieskilled++;
+
+            if (deathPaticles)
+            {
+                var temp = Instantiate(deathPaticles, transform.position, Quaternion.identity);
+                Destroy(temp, 2);
             }
 
             Destroy(this.gameObject);

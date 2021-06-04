@@ -14,9 +14,6 @@ public static class Score
         // Add score
         score += amount;
 
-        // Debugging message
-        Debug.Log($"Score: {score.ToString()}");
-
         // Nullable
         if (OnAddScore != null)
         {

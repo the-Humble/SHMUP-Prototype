@@ -14,12 +14,15 @@ public class GameManager : MonoBehaviour
     private bool respawning = false;
     private bool gameOver = false;
     private bool victory = false;
+    private int timer;
 
     private PlayerController player;
 
     public bool GameOver { get { return gameOver; } }
 
     public bool Victory { get { return victory; } }
+
+    public int Timer { get { return timer; } set { timer = value; } }
 
     public int enemiesNeededToWin = 20;
     public int enemieskilled = 0;
@@ -41,6 +44,8 @@ public class GameManager : MonoBehaviour
         // Get player controller's component
         player = FindObjectOfType<PlayerController>();
 
+        timer = timeCount;
+
         // Start Timer
         StartCoroutine(timeCoroutine());
     }
@@ -54,16 +59,22 @@ public class GameManager : MonoBehaviour
             Invoke("RespawnPlayer", 2);
         }
 
-        if(playerLives <= 0 && livePlayer == null && !gameOver)
+        if(!gameOver && (playerLives <= 0 && livePlayer == null))
         {
-            Time.timeScale = 0;
             gameOver = true;
+            Time.timeScale = 0;
             Score.ResetScore();
+        }
+
+        if(timer <= 0 && playerLives >= 0)
+        {
+            playerLives = -1;
+            Destroy(livePlayer);
         }
 
         if (enemieskilled >= enemiesNeededToWin && !victory)
         {
-            Score.AddScore(timeCount);
+            Score.AddScore(timer);
             Time.timeScale = 0;
             victory = true;
             Score.ResetScore();
@@ -177,9 +188,9 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator timeCoroutine()
     {
-        while(timeCount > 0)
+        while(timer > 0)
         {
-            timeCount--;
+            timer--;
             yield return new WaitForSeconds(1);
         }
     }
