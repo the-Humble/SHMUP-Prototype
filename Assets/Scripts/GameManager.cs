@@ -103,7 +103,10 @@ public class GameManager : MonoBehaviour
                 if (player != null)
                 {
                     if (speedPUPflag) StopCoroutine(speedCoroutine);
-                    else player.playerSpeed *=2;                    
+                    else {
+                        player.playerSpeed *=2;                    
+                        player.speedUpFlag = true;
+                    }
                     speedCoroutine = StartCoroutine(SpeedCoroutine(duration));
                 }
                 break;
@@ -111,7 +114,10 @@ public class GameManager : MonoBehaviour
                 if (player != null)
                 {
                     if (quickShotPUPflag) StopCoroutine(quickshotCoroutine);
-                    else player.currentWeapon.fireCooldown -= 0.2f;
+                    else {
+                        player.currentWeapon.fireCooldown -= 0.2f;
+                        player.quickFireFlag  = true;
+                    }
                     quickshotCoroutine =  StartCoroutine(QuickShotCoroutine(duration));
                 }
                 break;
@@ -165,6 +171,7 @@ public class GameManager : MonoBehaviour
         }
 
         speedPUPflag = false;
+        player.speedUpFlag = false;
     }
 
     public IEnumerator QuickShotCoroutine(float duration)
@@ -184,6 +191,7 @@ public class GameManager : MonoBehaviour
         }
 
         quickShotPUPflag = false;
+        player.quickFireFlag = false;
     }
 
     private IEnumerator timeCoroutine()

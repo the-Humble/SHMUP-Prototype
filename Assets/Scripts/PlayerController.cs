@@ -6,7 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] public float playerSpeed = 10;
     [SerializeField] private Weapon[] weapons;
-    [SerializeField] private GameObject forceField;
+    [SerializeField] private GameObject invincibilitySprite;
+    [SerializeField] private GameObject speedUpSprite;
+    [SerializeField] private GameObject quickFireSprite;
     public Weapon currentWeapon;
     private int currentWeaponIndex = 0;
 
@@ -14,6 +16,8 @@ public class PlayerController : MonoBehaviour
     
     // Flag to make player invincible after picking power up
     public bool invincibilityFlag;
+    public bool speedUpFlag;
+    public bool quickFireFlag;
 
 
 
@@ -41,8 +45,12 @@ public class PlayerController : MonoBehaviour
             currentWeapon.TryFire();
         }
 
-        forceField.SetActive(false);
-        if (invincibilityFlag) forceField.SetActive(true);
+        invincibilitySprite.SetActive(false);
+        speedUpSprite.SetActive(false);
+        quickFireSprite.SetActive(false);
+        if (invincibilityFlag) invincibilitySprite.SetActive(true);
+        if (speedUpFlag) speedUpSprite.SetActive(true);
+        if (quickFireFlag) quickFireSprite.SetActive(true);
     }
 
     // Update is called once per frame
