@@ -14,12 +14,23 @@ public class PowerUp : MonoBehaviour
 {
     [SerializeField] PowerUpEnum powerUpType;
     [SerializeField] float timeDuration;
+    [SerializeField] float lifeTime;
+    [SerializeField] float blinkLifeTime;
+    [SerializeField] float blinkTime;
+    [SerializeField] float animationStength = .005f;
+    [SerializeField] float animationSpeed = 2f;
 
     private GameManager gManager;
 
     private void Awake()
     {
         gManager = FindObjectOfType<GameManager>();
+        StartCoroutine(LifeTime());
+    }
+
+    private void FixedUpdate() 
+    {
+        gameObject.transform.position += new Vector3(0, Mathf.Cos(Time.time*animationSpeed)*animationStength, 0);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -41,6 +52,26 @@ public class PowerUp : MonoBehaviour
 
             Destroy(gameObject);
         }
+    }
+
+    private IEnumerator LifeTime()
+    {
+        yield return new WaitForSeconds(lifeTime);
+
+        float counter = 0;
+
+        while (counter <= blinkLifeTime)
+        {
+            gameObject.GetComponent<Renderer>().enabled = false;
+            yield return new WaitForSeconds(blinkTime);
+            counter += blinkTime;
+            gameObject.GetComponent<Renderer>().enabled = true;
+            yield return new WaitForSeconds(blinkTime);
+            counter += blinkTime;
+        }
+
+        Destroy(gameObject);
+        yield break;
     }
 
 

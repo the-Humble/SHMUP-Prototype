@@ -98,6 +98,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUpType: 1
   timeDuration: 3
+  lifeTime: 3
+  blinkLifeTime: 2
+  blinkTime: 0.5
+  animationStength: 0.005
 --- !u!61 &2679882083183006564
 BoxCollider2D:
   m_ObjectHideFlags: 0
