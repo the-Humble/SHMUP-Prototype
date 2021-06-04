@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 3514538229056123921}
   - component: {fileID: 3514538229056123923}
   - component: {fileID: 3514538229056123920}
+  - component: {fileID: 1558302269}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -173,6 +174,29 @@ MonoBehaviour:
   playerSpeed: 10
   weapons:
   - {fileID: 6198774384520785462}
+  currentWeapon: {fileID: 0}
+  invincibilityFlag: 0
+--- !u!50 &1558302269
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3514538230986478715}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1001 &5431496883409247152
 PrefabInstance:
   m_ObjectHideFlags: 0

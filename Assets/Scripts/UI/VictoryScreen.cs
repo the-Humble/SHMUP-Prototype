@@ -16,7 +16,7 @@ public class VictoryScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (manager.enemieskilled == manager.enemiesNeededToWin)
+        if (manager.Victory)
         {
             victoryScreen.SetActive(true);
         }

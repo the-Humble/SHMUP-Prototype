@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float playerSpeed = 10;
+    [SerializeField] public float playerSpeed = 10;
     [SerializeField] private Weapon[] weapons;
-    private Weapon currentWeapon;
+    public Weapon currentWeapon;
     private int currentWeaponIndex = 0;
 
     private Vector2 screenBounds;
     
+    // Flag to make player invincible after picking power up
+    public bool invincibilityFlag;
+
 
 
     // Start is called before the first frame update
@@ -52,9 +55,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.GetComponent<Asteroid>() != null)
+        if(!invincibilityFlag)
         {
-            Destroy(gameObject);
+            if(collision.gameObject.GetComponent<Asteroid>() != null)
+            {
+                Destroy(gameObject);
+            }
         }
+        
     }
 }

@@ -161,3 +161,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28fccdc0771d3b24bbc91dfd074901a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreValue: 10
+  drops:
+  - {fileID: 6486620812931134989, guid: 5270a8aa5bca354409fe17ff5c298b75, type: 3}
+  - {fileID: 2679882083183006565, guid: 69fdc40f4a0e6ca418888295775e7336, type: 3}
+  - {fileID: 3571747443514345433, guid: 0869761cee3645b42995e45f579b8d65, type: 3}
+  PUPDropChance: 0.25
+  deathPaticles: {fileID: 6767377414070159998, guid: a0408e86f470c7b4da0a3f2697703733, type: 3}

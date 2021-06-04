@@ -5,7 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [SerializeField] GameObject bulletPrefab;
-    [SerializeField] float fireCooldown = 0.5f;
+    [SerializeField] public float fireCooldown = 0.5f;
     private float fireTimer;
 
     // Start is called before the first frame update
