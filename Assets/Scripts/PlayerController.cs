@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] public float playerSpeed = 10;
     [SerializeField] private Weapon[] weapons;
+    [SerializeField] private GameObject forceField;
     public Weapon currentWeapon;
     private int currentWeaponIndex = 0;
 
@@ -39,6 +40,9 @@ public class PlayerController : MonoBehaviour
         {
             currentWeapon.TryFire();
         }
+
+        forceField.SetActive(false);
+        if (invincibilityFlag) forceField.SetActive(true);
     }
 
     // Update is called once per frame
